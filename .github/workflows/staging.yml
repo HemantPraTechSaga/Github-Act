@@ -1,0 +1,26 @@
+name: Staging Pipeline
+
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+    environment: staging
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run app
+        run: npm start
+        env:
+          ENVIRONMENT: staging
+
+      - name: Deploy to STAGING
+        run: echo "Deploying to STAGING environment"

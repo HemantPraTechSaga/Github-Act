@@ -1,0 +1,26 @@
+name: Production Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-prod:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run app
+        run: npm start
+        env:
+          ENVIRONMENT: production
+
+      - name: Deploy to PRODUCTION
+        run: echo "Deploying to PRODUCTION environment"
